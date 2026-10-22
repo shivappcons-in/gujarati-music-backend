@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import requests
 
 app = FastAPI()
 
@@ -18,8 +19,15 @@ def read_root():
 @app.post("/generate-song")
 def generate_song(data: dict):
     prompt = data.get("prompt", "")
+    style = data.get("style", "")
+    
+    # Yahan aap Suno AI ya Hugging Face ka real audio generation API model integration dal sakte hain
+    # Jaise ki external AI service se audio URL fetch karna
+    
+    generated_audio_url = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" # Ise apne AI model ke output URL se replace karein
+    
     return {
         "status": "success",
-        "message": f"Successfully generated Gujarati song for prompt: {prompt}",
-        "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        "message": f"Successfully generated Gujarati song for style: {style}",
+        "audio_url": generated_audio_url
     }
